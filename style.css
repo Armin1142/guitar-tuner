@@ -371,6 +371,26 @@ body {
   50% { opacity: 1; }
 }
 
+.coffee-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid #3a332b;
+  color: #d8cfc2;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color .15s, color .15s;
+}
+
+.coffee-link:hover {
+  border-color: #e0a458;
+  color: #e0a458;
+}
+
 .hint-text {
   text-align: center;
   font-size: 10px;
