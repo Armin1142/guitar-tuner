@@ -49,9 +49,9 @@
         <div class="stage-top">
           <div class="cents-gauge" id="cents-gauge">
             <svg viewBox="0 0 60 60" width="60" height="60">
-              <circle cx="30" cy="30" r="25" fill="none" stroke="#3a332b" stroke-width="4" />
-              <line id="cents-needle" x1="30" y1="30" x2="30" y2="9" stroke="#6b6154" stroke-width="3" stroke-linecap="round" transform="rotate(0 30 30)" />
-              <circle cx="30" cy="30" r="3" fill="#6b6154" id="cents-needle-hub" />
+              <circle cx="30" cy="30" r="25" fill="none" stroke="var(--border)" stroke-width="4" />
+              <line id="cents-needle" x1="30" y1="30" x2="30" y2="9" stroke="var(--text-3)" stroke-width="3" stroke-linecap="round" transform="rotate(0 30 30)" />
+              <circle cx="30" cy="30" r="3" fill="var(--text-3)" id="cents-needle-hub" />
             </svg>
             <span class="cents-gauge-value" id="cents-gauge-value">—</span>
           </div>
@@ -75,35 +75,37 @@
       </div>
 
       <div class="panel-right">
-        <svg class="headstock-svg" viewBox="0 0 320 420" preserveAspectRatio="xMidYMid meet">
+        <svg class="headstock-svg" viewBox="0 0 320 460" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="woodGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#3d2b1f" />
-              <stop offset="100%" stop-color="#241a12" />
+              <stop offset="0%" stop-color="var(--surface-hover)" />
+              <stop offset="100%" stop-color="var(--bg-2)" />
             </linearGradient>
           </defs>
 
           <!-- boyun / gövde devamı -->
-          <rect x="128" y="376" width="64" height="44" fill="#1c140d" />
+          <rect x="128" y="376" width="64" height="80" fill="var(--bg-2)" />
 
           <!-- teller: burgudan ata (nut) kadar -->
-          <line x1="80" y1="100" x2="100" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="80" y1="200" x2="124" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="80" y1="300" x2="148" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="240" y1="100" x2="172" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="240" y1="200" x2="196" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="240" y1="300" x2="220" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <!-- teller: boyun devamı -->
-          <line x1="100" y1="378" x2="132" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="124" y1="378" x2="143" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="148" y1="378" x2="154" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="172" y1="378" x2="166" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="196" y1="378" x2="177" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
-          <line x1="220" y1="378" x2="188" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="80" y1="100" x2="100" y2="378" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="80" y1="200" x2="124" y2="378" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="80" y1="300" x2="148" y2="378" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="240" y1="100" x2="172" y2="378" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="240" y1="200" x2="196" y2="378" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="240" y1="300" x2="220" y2="378" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <!-- teller: boyun devamı, köprüye (bridge) kadar bağlanıyor -->
+          <line x1="100" y1="378" x2="132" y2="440" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="124" y1="378" x2="143" y2="440" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="148" y1="378" x2="154" y2="440" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="172" y1="378" x2="166" y2="440" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="196" y1="378" x2="177" y2="440" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <line x1="220" y1="378" x2="188" y2="440" stroke="var(--text-3)" stroke-width="1.5" opacity=".8" />
+          <!-- köprü (bridge): teller burada sona eriyor -->
+          <rect x="128" y="436" width="64" height="8" rx="3" fill="var(--text-3)" />
 
           <!-- kafa (headstock) gövdesi -->
           <path d="M130,40 C100,40 80,60 80,90 L80,330 C80,355 100,370 130,378 L190,378 C220,370 240,355 240,330 L240,90 C240,60 220,40 190,40 Z"
-                fill="url(#woodGrad)" stroke="#4a3527" stroke-width="2" />
+                fill="url(#woodGrad)" stroke="var(--text-3)" stroke-width="2" />
 
           <!-- burgu başları (tuning pegs) -->
           <circle cx="80" cy="100" r="9" fill="#cfcfcf" stroke="#8a8a8a" />
