@@ -372,22 +372,26 @@ body {
 }
 
 .coffee-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 12px;
-  padding: 7px 14px;
-  border-radius: 999px;
-  border: 1px solid #3a332b;
-  color: #d8cfc2;
+  justify-content: center;
+  gap: 7px;
+  width: fit-content;
+  margin: 22px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid #3a332b;
+  color: #a4937d;
   font-size: 12px;
   font-weight: 500;
   text-decoration: none;
-  transition: border-color .15s, color .15s;
+  transition: color .15s;
+}
+
+.coffee-link span {
+  font-size: 14px;
 }
 
 .coffee-link:hover {
-  border-color: #e0a458;
   color: #e0a458;
 }
 
