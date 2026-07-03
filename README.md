@@ -15,6 +15,8 @@ Bu proje adım adım şu sırayla inşa edildi (her adım kendi başına test ed
 7. Son birkaç saniyenin cent geçmişini gösteren küçük çizgi grafik (canvas) — anlık iğneye ek olarak eğilimi (yaklaşıyor mu, uzaklaşıyor mu) görmek için
 8. Sağ üstte 10 dilli dil seçici (bayrak + kendi dilinde isim): Türkçe, English, Español, Français, Deutsch, Italiano, Português, Русский, 中文, العربية. Tüm arayüz metinleri `script.js` içindeki `TRANSLATIONS` objesinden geliyor, `t("anahtar")` ile okunuyor. Not: dört yön (RTL) desteği eklenmedi, Arapça metin doğru görünür ama sayfa düzeni her zaman soldan sağa kalıyor (bilinçli kapsam kısıtlaması).
 9. Yatay (iki panelli) düzen: solda bilgi/kontroller, sağda büyük gitar kafası illüstrasyonu. Dar pencerelerde otomatik dikey düzene dönüyor (bkz. `style.css` içindeki `@media (max-width: 560px)`).
+10. Sağ üstte 6 renkli tema seçici (kehribar, turkuaz, mavi, mor, pembe, gümüş) — `style.css`'in başındaki CSS değişkenleri (`--accent`, `--bg-1/2`, `--card-1/2`, `--border`) `:root[data-theme="..."]` ile üzerine yazılıyor. Seçim `localStorage`'da (`gitar-akort-theme`) hatırlanıyor. Gitar kafasının ahşap rengi ve akort durum renkleri (yeşil/sarı/kırmızı) kasıtlı olarak temadan bağımsız/sabit tutuldu.
+11. Kartın altına, iki paneli de kapsayan tam genişlikte bir "Buy me a coffee" destek linki eklendi (`buymeacoffee.com/Armin1142`). İnce bir üst ayraç çizgisiyle ayrılmış, soluk bir tonda duruyor ki mikrofon butonuyla dikkat çekme rekabetine girmesin; üzerine gelince tema rengine (`--accent`) dönüyor.
 
 ## Dosyalar
 
