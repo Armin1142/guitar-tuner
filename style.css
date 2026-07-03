@@ -2,6 +2,69 @@
   box-sizing: border-box;
 }
 
+/* Tema renkleri: amber varsayılan, diğerleri [data-theme] ile üstüne yazıyor.
+   Gitar kafası (headstock) ahşap tonu kasıtlı olarak sabit - tema değişse de
+   ahşap ahşap kalıyor, sadece arayüzün geri kalanı renk değiştiriyor. */
+:root {
+  --accent: #e0a458;
+  --accent-contrast: #231a10;
+  --bg-1: #2a2420;
+  --bg-2: #17120f;
+  --card-1: #241f1a;
+  --card-2: #1e1a15;
+  --border: #3a332b;
+}
+
+:root[data-theme="teal"] {
+  --accent: #4fb8a8;
+  --accent-contrast: #08211d;
+  --bg-1: #1f2b2a;
+  --bg-2: #0f1716;
+  --card-1: #1d2726;
+  --card-2: #161e1d;
+  --border: #2e3a38;
+}
+
+:root[data-theme="blue"] {
+  --accent: #5b9bd5;
+  --accent-contrast: #0d1f30;
+  --bg-1: #1f2530;
+  --bg-2: #10141c;
+  --card-1: #1c2330;
+  --card-2: #161b26;
+  --border: #2c3542;
+}
+
+:root[data-theme="purple"] {
+  --accent: #9b7fd4;
+  --accent-contrast: #1c1330;
+  --bg-1: #241f2e;
+  --bg-2: #141018;
+  --card-1: #221d2b;
+  --card-2: #1a1621;
+  --border: #332c3e;
+}
+
+:root[data-theme="rose"] {
+  --accent: #d97fa0;
+  --accent-contrast: #2e0f1a;
+  --bg-1: #2a2024;
+  --bg-2: #180f12;
+  --card-1: #261e22;
+  --card-2: #1e171a;
+  --border: #3a2c31;
+}
+
+:root[data-theme="silver"] {
+  --accent: #b8bcc4;
+  --accent-contrast: #1a1c20;
+  --bg-1: #252627;
+  --bg-2: #131414;
+  --card-1: #232425;
+  --card-2: #1b1c1d;
+  --border: #38393b;
+}
+
 html, body {
   height: 100%;
 }
@@ -15,7 +78,8 @@ body {
   padding: 16px;
   font-family: 'Space Grotesk', system-ui, sans-serif;
   color: #f2ebe1;
-  background: radial-gradient(120% 120% at 50% 0%, #2a2420 0%, #17120f 70%);
+  background: radial-gradient(120% 120% at 50% 0%, var(--bg-1) 0%, var(--bg-2) 70%);
+  transition: background .25s ease;
 }
 
 .app-card {
@@ -23,11 +87,12 @@ body {
   max-width: 680px;
   max-height: 96vh;
   overflow-y: auto;
-  background: linear-gradient(180deg, #241f1a 0%, #1e1a15 100%);
-  border: 1px solid #3a332b;
+  background: linear-gradient(180deg, var(--card-1) 0%, var(--card-2) 100%);
+  border: 1px solid var(--border);
   border-radius: 22px;
   padding: 22px 26px 20px;
   box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .04);
+  transition: background .25s ease, border-color .25s ease;
 }
 
 .header-row {
@@ -47,13 +112,14 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 9px;
-  background: #e0a458;
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #231a10;
+  color: var(--accent-contrast);
   font-weight: 700;
   font-size: 17px;
+  transition: background .25s ease, color .25s ease;
 }
 
 .brand-title {
@@ -85,7 +151,7 @@ body {
   gap: 5px;
   padding: 5px 9px;
   border-radius: 8px;
-  border: 1px solid #3a332b;
+  border: 1px solid var(--border);
   background: #2a241e;
   color: #d8cfc2;
   font-size: 14px;
@@ -108,8 +174,8 @@ body {
   top: calc(100% + 6px);
   right: 0;
   z-index: 10;
-  background: #241f1a;
-  border: 1px solid #3a332b;
+  background: var(--card-1);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 6px;
   min-width: 168px;
@@ -142,8 +208,31 @@ body {
 }
 
 .lang-option.selected {
-  background: #e0a458;
-  color: #231a10;
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.theme-picker {
+  display: flex;
+  gap: 5px;
+}
+
+.theme-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: var(--swatch);
+  padding: 0;
+  cursor: pointer;
+}
+
+.theme-swatch:hover {
+  border-color: rgba(242, 235, 225, .35);
+}
+
+.theme-swatch.selected {
+  border-color: #f2ebe1;
 }
 
 .mic-status {
@@ -224,7 +313,7 @@ body {
 
 .status-bubble {
   background: #2a241e;
-  border: 1px solid #3a332b;
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 7px 15px;
   font-size: 12px;
@@ -279,7 +368,7 @@ body {
   height: 48px;
   display: block;
   background: #201a14;
-  border: 1px solid #3a332b;
+  border: 1px solid var(--border);
   border-radius: 9px;
 }
 
@@ -296,7 +385,7 @@ body {
 
 .string-node circle {
   fill: #2a241e;
-  stroke: #3a332b;
+  stroke: var(--border);
   stroke-width: 2;
   transition: fill .15s, stroke .15s;
 }
@@ -317,12 +406,12 @@ body {
 }
 
 .string-node.active circle {
-  fill: #e0a458;
-  stroke: #e0a458;
+  fill: var(--accent);
+  stroke: var(--accent);
 }
 
 .string-node.active text {
-  fill: #231a10;
+  fill: var(--accent-contrast);
 }
 
 .mic-btn {
@@ -336,8 +425,8 @@ body {
   font-weight: 600;
   letter-spacing: .3px;
   transition: all .15s;
-  background: #e0a458;
-  color: #231a10;
+  background: var(--accent);
+  color: var(--accent-contrast);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -379,7 +468,7 @@ body {
   width: fit-content;
   margin: 22px auto 0;
   padding-top: 16px;
-  border-top: 1px solid #3a332b;
+  border-top: 1px solid var(--border);
   color: #a4937d;
   font-size: 12px;
   font-weight: 500;
@@ -392,7 +481,7 @@ body {
 }
 
 .coffee-link:hover {
-  color: #e0a458;
+  color: var(--accent);
 }
 
 .hint-text {
