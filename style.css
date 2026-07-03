@@ -2,12 +2,27 @@
   box-sizing: border-box;
 }
 
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* Tema renkleri: her tema accent/arkaplan/kart/kenarlık ile BİRLİKTE kendi
    metin (--text-1/2/3) ve yüzey (--surface, --surface-hover) tonlarını da
    tanımlıyor - böylece açık (beyaz) temada koyu metin, koyu temalarda açık
    metin garanti oluyor. Kahverengi varsayılan; [data-theme] ile üstüne
-   yazılıyor. Gitar kafası (headstock) ahşap tonu ve akort durum renkleri
-   (yeşil/sarı/kırmızı) kasıtlı olarak temadan bağımsız/sabit kalıyor. */
+   yazılıyor. Gitar kafasının gövdesi de bu değişkenlerle boyanıyor (bkz.
+   #woodGrad, index.html) - sadece burgu başları (tuning pegs) gerçekçi metal
+   görünümü için kasıtlı olarak sabit gri/gümüş kalıyor. Akort durum renkleri
+   (yeşil/sarı/kırmızı, script.js'te GREEN/YELLOW/RED) de anlamsal oldukları
+   için temadan bağımsız.
+
+   Yeni tema eklemek için: aşağıya aynı 12 değişkenle bir
+   `:root[data-theme="adın"] { ... }` bloğu ekle, sonra index.html'deki
+   `.theme-picker` içine `data-theme="adın"` ve `style="--swatch:#renk"`
+   ile bir `<button class="theme-swatch">` ekle - script.js hiçbir
+   değişiklik gerektirmez, tema listesini DOM'dan otomatik okuyor. */
 :root,
 :root[data-theme="brown"] {
   --accent: #e0a458;
