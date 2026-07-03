@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gitar Akort Cihazı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-card">
+    <div class="header-row">
+      <div class="brand">
+        <div class="logo-badge">♪</div>
+        <div>
+          <div class="brand-title" id="brand-title">Gitar Akort</div>
+          <div class="brand-subtitle" id="brand-subtitle">Standart akort · EADGBE</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="lang-select" id="lang-select">
+          <button class="lang-btn" id="lang-btn" type="button">
+            <span id="lang-btn-flag">🇹🇷</span>
+            <span class="lang-chevron">▾</span>
+          </button>
+          <div class="lang-menu" id="lang-menu"></div>
+        </div>
+        <div class="mic-status" id="mic-status">
+          <span class="mic-dot" id="mic-dot"></span>
+          <span id="mic-status-text">kapalı</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="panel-left">
+        <div class="stage-top">
+          <div class="cents-gauge" id="cents-gauge">
+            <svg viewBox="0 0 60 60" width="60" height="60">
+              <circle cx="30" cy="30" r="25" fill="none" stroke="#3a332b" stroke-width="4" />
+              <line id="cents-needle" x1="30" y1="30" x2="30" y2="9" stroke="#6b6154" stroke-width="3" stroke-linecap="round" transform="rotate(0 30 30)" />
+              <circle cx="30" cy="30" r="3" fill="#6b6154" id="cents-needle-hub" />
+            </svg>
+            <span class="cents-gauge-value" id="cents-gauge-value">—</span>
+          </div>
+          <div class="status-bubble" id="status-bubble">Bir tel çal</div>
+        </div>
+
+        <div class="note-badge" id="note-badge">E2</div>
+        <div class="hz-text"><span id="hz-value">—</span> <span class="hz-unit">Hz</span></div>
+
+        <div class="history-wrap">
+          <div class="history-label" id="history-label">Son birkaç saniye</div>
+          <canvas id="history-canvas" class="history-canvas" width="384" height="48"></canvas>
+        </div>
+
+        <button id="mic-btn" class="mic-btn">
+          <span class="mic-btn-dot" id="mic-btn-dot"></span>
+          <span id="mic-btn-text">Mikrofonu Başlat</span>
+        </button>
+
+        <div class="hint-text" id="hint-text">Teli tek başına çal, sabit tut ve göstergeyi ortala.</div>
+      </div>
+
+      <div class="panel-right">
+        <svg class="headstock-svg" viewBox="0 0 320 420" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="woodGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#3d2b1f" />
+              <stop offset="100%" stop-color="#241a12" />
+            </linearGradient>
+          </defs>
+
+          <!-- boyun / gövde devamı -->
+          <rect x="128" y="376" width="64" height="44" fill="#1c140d" />
+
+          <!-- teller: burgudan ata (nut) kadar -->
+          <line x1="80" y1="100" x2="100" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="80" y1="200" x2="124" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="80" y1="300" x2="148" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="240" y1="100" x2="172" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="240" y1="200" x2="196" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="240" y1="300" x2="220" y2="378" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <!-- teller: boyun devamı -->
+          <line x1="100" y1="378" x2="132" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="124" y1="378" x2="143" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="148" y1="378" x2="154" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="172" y1="378" x2="166" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="196" y1="378" x2="177" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+          <line x1="220" y1="378" x2="188" y2="420" stroke="#5c5044" stroke-width="1.5" opacity=".8" />
+
+          <!-- kafa (headstock) gövdesi -->
+          <path d="M130,40 C100,40 80,60 80,90 L80,330 C80,355 100,370 130,378 L190,378 C220,370 240,355 240,330 L240,90 C240,60 220,40 190,40 Z"
+                fill="url(#woodGrad)" stroke="#4a3527" stroke-width="2" />
+
+          <!-- burgu başları (tuning pegs) -->
+          <circle cx="80" cy="100" r="9" fill="#cfcfcf" stroke="#8a8a8a" />
+          <circle cx="80" cy="200" r="9" fill="#cfcfcf" stroke="#8a8a8a" />
+          <circle cx="80" cy="300" r="9" fill="#cfcfcf" stroke="#8a8a8a" />
+          <circle cx="240" cy="100" r="9" fill="#cfcfcf" stroke="#8a8a8a" />
+          <circle cx="240" cy="200" r="9" fill="#cfcfcf" stroke="#8a8a8a" />
+          <circle cx="240" cy="300" r="9" fill="#cfcfcf" stroke="#8a8a8a" />
+
+          <!-- tel seçim düğmeleri -->
+          <g class="string-node" data-note="D3" data-freq="146.83">
+            <circle cx="26" cy="100" r="21" />
+            <text x="26" y="100">D</text>
+          </g>
+          <g class="string-node" data-note="A2" data-freq="110.00">
+            <circle cx="26" cy="200" r="21" />
+            <text x="26" y="200">A</text>
+          </g>
+          <g class="string-node" data-note="E2" data-freq="82.41">
+            <circle cx="26" cy="300" r="21" />
+            <text x="26" y="300">E</text>
+          </g>
+          <g class="string-node" data-note="G3" data-freq="196.00">
+            <circle cx="294" cy="100" r="21" />
+            <text x="294" y="100">G</text>
+          </g>
+          <g class="string-node" data-note="B3" data-freq="246.94">
+            <circle cx="294" cy="200" r="21" />
+            <text x="294" y="200">B</text>
+          </g>
+          <g class="string-node" data-note="E4" data-freq="329.63">
+            <circle cx="294" cy="300" r="21" />
+            <text x="294" y="300">E</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
