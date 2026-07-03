@@ -1,8 +1,6 @@
 const GREEN = "#5eae52";
 const YELLOW = "#e8c14a";
 const RED = "#c0553f";
-const NEUTRAL = "#6b6154";
-const IDLE_NOTE_COLOR = "#f2ebe1";
 const TOLERANCE = 5; // cent - bu kadar yakınsa "akort tamam" sayılır
 const SOMEWHAT = 18; // cent - bu aralıkta "biraz pes/tiz", ötesi "çok pes/tiz"
 
@@ -339,9 +337,12 @@ function render() {
   const clamped = cents == null ? 0 : Math.max(-50, Math.min(50, cents));
   const needleDeg = (clamped / 50) * 45;
 
-  let statusColor = NEUTRAL;
+  // statusColor null kalması "boşta" (henüz sinyal yok) demek - bu durumda
+  // inline rengi tamamen boşaltıyoruz ki CSS'teki tema değişkenleri
+  // (var(--text-1) vb.) devreye girsin. Aksi halde hardcoded bir renk
+  // tema değişse bile hep aynı kalırdı.
+  let statusColor = null;
   let statusText = t("playAString");
-  let noteColor = IDLE_NOTE_COLOR;
 
   if (cents != null) {
     const a = Math.abs(cents);
@@ -355,39 +356,34 @@ function render() {
       statusColor = RED;
       statusText = cents < 0 ? t("veryFlat") : t("verySharp");
     }
-    noteColor = statusColor;
   } else if (listening) {
     statusText = t("listening");
   }
 
-  // cents == null (henüz bir sinyal yok) demek "boşta" durum - bu durumda
-  // inline rengi tamamen boşaltıyoruz ki CSS'teki tema değişkenleri
-  // (var(--text-1) vb.) devreye girsin. Aksi halde eski hardcoded renkler
-  // tema değişse bile hep aynı kalırdı.
   noteBadgeEl.textContent = STRINGS[selectedIndex].label;
-  noteBadgeEl.style.color = cents != null ? noteColor : "";
-  noteBadgeEl.style.borderColor = cents != null ? statusColor : "";
+  noteBadgeEl.style.color = statusColor || "";
+  noteBadgeEl.style.borderColor = statusColor || "";
   hzValueEl.textContent = hz ? hz.toFixed(1) : "—";
 
   centsNeedle.setAttribute("transform", `rotate(${needleDeg} 30 30)`);
-  centsNeedle.style.stroke = cents != null ? statusColor : "";
-  centsNeedleHub.style.fill = cents != null ? statusColor : "";
+  centsNeedle.style.stroke = statusColor || "";
+  centsNeedleHub.style.fill = statusColor || "";
   centsGaugeValue.textContent = cents != null ? (cents > 0 ? "+" : "") + Math.round(cents) : "—";
 
   statusBubbleEl.textContent = statusText;
-  statusBubbleEl.style.color = cents != null ? statusColor : "";
-  statusBubbleEl.style.borderColor = cents != null ? statusColor : "";
+  statusBubbleEl.style.color = statusColor || "";
+  statusBubbleEl.style.borderColor = statusColor || "";
 
   centsHistory.push(cents);
   if (centsHistory.length > HISTORY_LENGTH) centsHistory.shift();
-  drawHistory(cents != null ? statusColor : "rgba(128,128,128,.6)");
+  drawHistory(statusColor || "rgba(128,128,128,.6)");
 
   // Seçili tel düğmesini akort durumuna göre boyuyoruz; diğerlerini
   // varsayılana döndürüyoruz ki eski renk üstünde kalmasın.
   stringNodes.forEach((node, i) => {
     const circle = node.querySelector("circle");
     const text = node.querySelector("text");
-    if (i === selectedIndex && cents != null) {
+    if (i === selectedIndex && statusColor) {
       circle.style.fill = statusColor;
       circle.style.stroke = statusColor;
       text.style.fill = "#1a1410";
