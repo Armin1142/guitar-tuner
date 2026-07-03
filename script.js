@@ -139,6 +139,22 @@ function t(key) {
   return TRANSLATIONS[currentLang][key];
 }
 
+const themeSwatches = Array.from(document.querySelectorAll(".theme-swatch"));
+const savedTheme = localStorage.getItem("gitar-akort-theme");
+if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+
+themeSwatches.forEach((swatch) => {
+  if (swatch.dataset.theme === (savedTheme || "amber")) {
+    themeSwatches.forEach((s) => s.classList.remove("selected"));
+    swatch.classList.add("selected");
+  }
+  swatch.addEventListener("click", () => {
+    document.documentElement.setAttribute("data-theme", swatch.dataset.theme);
+    localStorage.setItem("gitar-akort-theme", swatch.dataset.theme);
+    themeSwatches.forEach((s) => s.classList.toggle("selected", s === swatch));
+  });
+});
+
 const stringNodes = Array.from(document.querySelectorAll(".string-node"));
 const STRINGS = stringNodes.map((node) => ({
   label: node.dataset.note,
@@ -356,7 +372,7 @@ function render() {
 
   statusBubbleEl.textContent = statusText;
   statusBubbleEl.style.color = statusColor;
-  statusBubbleEl.style.borderColor = cents != null ? statusColor : "#3a332b";
+  statusBubbleEl.style.borderColor = cents != null ? statusColor : "";
 
   centsHistory.push(cents);
   if (centsHistory.length > HISTORY_LENGTH) centsHistory.shift();
