@@ -2,10 +2,14 @@
   box-sizing: border-box;
 }
 
-/* Tema renkleri: amber varsayılan, diğerleri [data-theme] ile üstüne yazıyor.
-   Gitar kafası (headstock) ahşap tonu kasıtlı olarak sabit - tema değişse de
-   ahşap ahşap kalıyor, sadece arayüzün geri kalanı renk değiştiriyor. */
-:root {
+/* Tema renkleri: her tema accent/arkaplan/kart/kenarlık ile BİRLİKTE kendi
+   metin (--text-1/2/3) ve yüzey (--surface, --surface-hover) tonlarını da
+   tanımlıyor - böylece açık (beyaz) temada koyu metin, koyu temalarda açık
+   metin garanti oluyor. Kahverengi varsayılan; [data-theme] ile üstüne
+   yazılıyor. Gitar kafası (headstock) ahşap tonu ve akort durum renkleri
+   (yeşil/sarı/kırmızı) kasıtlı olarak temadan bağımsız/sabit kalıyor. */
+:root,
+:root[data-theme="brown"] {
   --accent: #e0a458;
   --accent-contrast: #231a10;
   --bg-1: #2a2420;
@@ -13,16 +17,41 @@
   --card-1: #241f1a;
   --card-2: #1e1a15;
   --border: #3a332b;
+  --text-1: #f2ebe1;
+  --text-2: #9a8f80;
+  --text-3: #6b6154;
+  --surface: #2a241e;
+  --surface-hover: #34291c;
 }
 
-:root[data-theme="teal"] {
-  --accent: #4fb8a8;
-  --accent-contrast: #08211d;
-  --bg-1: #1f2b2a;
-  --bg-2: #0f1716;
-  --card-1: #1d2726;
-  --card-2: #161e1d;
-  --border: #2e3a38;
+:root[data-theme="black"] {
+  --accent: #e8e8e8;
+  --accent-contrast: #0a0a0a;
+  --bg-1: #1a1a1a;
+  --bg-2: #050505;
+  --card-1: #161616;
+  --card-2: #0d0d0d;
+  --border: #2c2c2c;
+  --text-1: #f5f5f5;
+  --text-2: #9a9a9a;
+  --text-3: #6b6b6b;
+  --surface: #1e1e1e;
+  --surface-hover: #272727;
+}
+
+:root[data-theme="white"] {
+  --accent: #b8763a;
+  --accent-contrast: #fff8f0;
+  --bg-1: #f7f2ea;
+  --bg-2: #ece2d2;
+  --card-1: #fffdfa;
+  --card-2: #f5efe4;
+  --border: #ded2bf;
+  --text-1: #2a2018;
+  --text-2: #6b5d4d;
+  --text-3: #948573;
+  --surface: #efe7da;
+  --surface-hover: #e6dbc9;
 }
 
 :root[data-theme="blue"] {
@@ -33,36 +62,26 @@
   --card-1: #1c2330;
   --card-2: #161b26;
   --border: #2c3542;
+  --text-1: #eaf0f7;
+  --text-2: #8fa3b8;
+  --text-3: #5f7285;
+  --surface: #202838;
+  --surface-hover: #293244;
 }
 
-:root[data-theme="purple"] {
-  --accent: #9b7fd4;
-  --accent-contrast: #1c1330;
-  --bg-1: #241f2e;
-  --bg-2: #141018;
-  --card-1: #221d2b;
-  --card-2: #1a1621;
-  --border: #332c3e;
-}
-
-:root[data-theme="rose"] {
-  --accent: #d97fa0;
-  --accent-contrast: #2e0f1a;
-  --bg-1: #2a2024;
-  --bg-2: #180f12;
-  --card-1: #261e22;
-  --card-2: #1e171a;
-  --border: #3a2c31;
-}
-
-:root[data-theme="silver"] {
-  --accent: #b8bcc4;
-  --accent-contrast: #1a1c20;
-  --bg-1: #252627;
-  --bg-2: #131414;
-  --card-1: #232425;
-  --card-2: #1b1c1d;
-  --border: #38393b;
+:root[data-theme="green"] {
+  --accent: #6fae5e;
+  --accent-contrast: #0f2410;
+  --bg-1: #1f2a1f;
+  --bg-2: #0f160f;
+  --card-1: #1d251d;
+  --card-2: #171e17;
+  --border: #2e3a2e;
+  --text-1: #eaf2ea;
+  --text-2: #8fae8f;
+  --text-3: #5f7a5f;
+  --surface: #1f281f;
+  --surface-hover: #283228;
 }
 
 html, body {
@@ -77,7 +96,7 @@ body {
   justify-content: center;
   padding: 16px;
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  color: #f2ebe1;
+  color: var(--text-1);
   background: radial-gradient(120% 120% at 50% 0%, var(--bg-1) 0%, var(--bg-2) 70%);
   transition: background .25s ease;
 }
@@ -130,7 +149,7 @@ body {
 
 .brand-subtitle {
   font-size: 11px;
-  color: #9a8f80;
+  color: var(--text-2);
   letter-spacing: .3px;
 }
 
@@ -152,20 +171,20 @@ body {
   padding: 5px 9px;
   border-radius: 8px;
   border: 1px solid var(--border);
-  background: #2a241e;
-  color: #d8cfc2;
+  background: var(--surface);
+  color: var(--text-1);
   font-size: 14px;
   cursor: pointer;
   transition: border-color .15s;
 }
 
 .lang-btn:hover {
-  border-color: #6b6154;
+  border-color: var(--text-3);
 }
 
 .lang-chevron {
   font-size: 9px;
-  color: #7a7062;
+  color: var(--text-2);
 }
 
 .lang-menu {
@@ -195,7 +214,7 @@ body {
   border-radius: 8px;
   border: none;
   background: transparent;
-  color: #d8cfc2;
+  color: var(--text-1);
   font-family: inherit;
   font-size: 13px;
   text-align: left;
@@ -204,7 +223,7 @@ body {
 }
 
 .lang-option:hover {
-  background: #34291c;
+  background: var(--surface-hover);
 }
 
 .lang-option.selected {
@@ -223,16 +242,17 @@ body {
   border-radius: 50%;
   border: 2px solid transparent;
   background: var(--swatch);
+  box-shadow: 0 0 0 1px var(--border);
   padding: 0;
   cursor: pointer;
 }
 
 .theme-swatch:hover {
-  border-color: rgba(242, 235, 225, .35);
+  border-color: var(--text-3);
 }
 
 .theme-swatch.selected {
-  border-color: #f2ebe1;
+  border-color: var(--text-1);
 }
 
 .mic-status {
@@ -240,15 +260,15 @@ body {
   align-items: center;
   gap: 7px;
   font-size: 11px;
-  color: #6b6154;
+  color: var(--text-3);
 }
 
 .mic-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #6b6154;
-  box-shadow: 0 0 8px #6b6154;
+  background: var(--text-3);
+  box-shadow: 0 0 8px var(--text-3);
 }
 
 .mic-status.active {
@@ -300,6 +320,14 @@ body {
   height: 56px;
 }
 
+#cents-needle {
+  stroke: var(--text-3);
+}
+
+#cents-needle-hub {
+  fill: var(--text-3);
+}
+
 .cents-gauge-value {
   position: absolute;
   inset: 0;
@@ -308,17 +336,17 @@ body {
   justify-content: center;
   font-family: 'Spline Sans Mono', monospace;
   font-size: 12px;
-  color: #9a8f80;
+  color: var(--text-2);
 }
 
 .status-bubble {
-  background: #2a241e;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 7px 15px;
   font-size: 12px;
   font-weight: 600;
-  color: #d8cfc2;
+  color: var(--text-1);
   letter-spacing: .2px;
   margin-top: 8px;
 }
@@ -327,14 +355,14 @@ body {
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  background: #2a241e;
-  border: 2px solid #6b6154;
+  background: var(--surface);
+  border: 2px solid var(--text-3);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 30px;
   font-weight: 700;
-  color: #f2ebe1;
+  color: var(--text-1);
   transition: color .18s, border-color .18s;
   margin-top: 6px;
 }
@@ -342,13 +370,13 @@ body {
 .hz-text {
   font-family: 'Spline Sans Mono', monospace;
   font-size: 14px;
-  color: #9a8f80;
+  color: var(--text-2);
   margin: 8px 0 4px;
   letter-spacing: .5px;
 }
 
 .hz-unit {
-  color: #6b6154;
+  color: var(--text-3);
 }
 
 .history-wrap {
@@ -358,7 +386,7 @@ body {
 
 .history-label {
   font-size: 10px;
-  color: #6b6154;
+  color: var(--text-3);
   letter-spacing: .3px;
   margin-bottom: 3px;
 }
@@ -367,7 +395,7 @@ body {
   width: 100%;
   height: 48px;
   display: block;
-  background: #201a14;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 9px;
 }
@@ -384,7 +412,7 @@ body {
 }
 
 .string-node circle {
-  fill: #2a241e;
+  fill: var(--surface);
   stroke: var(--border);
   stroke-width: 2;
   transition: fill .15s, stroke .15s;
@@ -394,7 +422,7 @@ body {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
   font-weight: 600;
-  fill: #d8cfc2;
+  fill: var(--text-1);
   text-anchor: middle;
   dominant-baseline: central;
   pointer-events: none;
@@ -402,7 +430,7 @@ body {
 }
 
 .string-node:hover circle {
-  stroke: #6b6154;
+  stroke: var(--text-3);
 }
 
 .string-node.active circle {
@@ -469,7 +497,7 @@ body {
   margin: 22px auto 0;
   padding-top: 16px;
   border-top: 1px solid var(--border);
-  color: #a4937d;
+  color: var(--text-2);
   font-size: 12px;
   font-weight: 500;
   text-decoration: none;
@@ -487,7 +515,7 @@ body {
 .hint-text {
   text-align: center;
   font-size: 10px;
-  color: #6b6154;
+  color: var(--text-3);
   margin-top: 10px;
   letter-spacing: .2px;
 }
