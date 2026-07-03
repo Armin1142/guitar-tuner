@@ -144,7 +144,7 @@ const savedTheme = localStorage.getItem("gitar-akort-theme");
 if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
 
 themeSwatches.forEach((swatch) => {
-  if (swatch.dataset.theme === (savedTheme || "amber")) {
+  if (swatch.dataset.theme === (savedTheme || "brown")) {
     themeSwatches.forEach((s) => s.classList.remove("selected"));
     swatch.classList.add("selected");
   }
@@ -360,23 +360,27 @@ function render() {
     statusText = t("listening");
   }
 
+  // cents == null (henüz bir sinyal yok) demek "boşta" durum - bu durumda
+  // inline rengi tamamen boşaltıyoruz ki CSS'teki tema değişkenleri
+  // (var(--text-1) vb.) devreye girsin. Aksi halde eski hardcoded renkler
+  // tema değişse bile hep aynı kalırdı.
   noteBadgeEl.textContent = STRINGS[selectedIndex].label;
-  noteBadgeEl.style.color = noteColor;
-  noteBadgeEl.style.borderColor = statusColor;
+  noteBadgeEl.style.color = cents != null ? noteColor : "";
+  noteBadgeEl.style.borderColor = cents != null ? statusColor : "";
   hzValueEl.textContent = hz ? hz.toFixed(1) : "—";
 
   centsNeedle.setAttribute("transform", `rotate(${needleDeg} 30 30)`);
-  centsNeedle.style.stroke = statusColor;
-  centsNeedleHub.style.fill = statusColor;
+  centsNeedle.style.stroke = cents != null ? statusColor : "";
+  centsNeedleHub.style.fill = cents != null ? statusColor : "";
   centsGaugeValue.textContent = cents != null ? (cents > 0 ? "+" : "") + Math.round(cents) : "—";
 
   statusBubbleEl.textContent = statusText;
-  statusBubbleEl.style.color = statusColor;
+  statusBubbleEl.style.color = cents != null ? statusColor : "";
   statusBubbleEl.style.borderColor = cents != null ? statusColor : "";
 
   centsHistory.push(cents);
   if (centsHistory.length > HISTORY_LENGTH) centsHistory.shift();
-  drawHistory(statusColor);
+  drawHistory(cents != null ? statusColor : "rgba(128,128,128,.6)");
 
   // Seçili tel düğmesini akort durumuna göre boyuyoruz; diğerlerini
   // varsayılana döndürüyoruz ki eski renk üstünde kalmasın.
@@ -411,7 +415,7 @@ function drawHistory(lineColor) {
   const h = historyCanvas.height;
   historyCtx.clearRect(0, 0, w, h);
 
-  historyCtx.strokeStyle = "rgba(242, 235, 225, 0.2)";
+  historyCtx.strokeStyle = "rgba(128, 128, 128, 0.25)";
   historyCtx.lineWidth = 1;
   historyCtx.beginPath();
   historyCtx.moveTo(0, h / 2);
