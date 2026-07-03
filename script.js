@@ -30,6 +30,7 @@ const TRANSLATIONS = {
     startMic: "Mikrofonu Başlat", stopMic: "Mikrofonu Durdur",
     hintNormal: "Teli tek başına çal, sabit tut ve göstergeyi ortala.",
     hintError: "Mikrofon erişimi reddedildi — tarayıcı ayarlarından izin ver.",
+    refToneOn: "Referans sesi: açık", refToneOff: "Referans sesi: kapalı",
   },
   en: {
     brandTitle: "Guitar Tuner", brandSubtitle: "Standard tuning · EADGBE",
@@ -41,6 +42,7 @@ const TRANSLATIONS = {
     startMic: "Start Microphone", stopMic: "Stop Microphone",
     hintNormal: "Pluck one string, hold it steady, and center the needle.",
     hintError: "Microphone access denied — allow it in your browser settings.",
+    refToneOn: "Reference tone: on", refToneOff: "Reference tone: off",
   },
   es: {
     brandTitle: "Afinador de Guitarra", brandSubtitle: "Afinación estándar · EADGBE",
@@ -52,6 +54,7 @@ const TRANSLATIONS = {
     startMic: "Iniciar Micrófono", stopMic: "Detener Micrófono",
     hintNormal: "Toca una sola cuerda, mantenla estable y centra la aguja.",
     hintError: "Acceso al micrófono denegado — permítelo en la configuración del navegador.",
+    refToneOn: "Tono de referencia: activado", refToneOff: "Tono de referencia: desactivado",
   },
   fr: {
     brandTitle: "Accordeur de Guitare", brandSubtitle: "Accordage standard · EADGBE",
@@ -63,6 +66,7 @@ const TRANSLATIONS = {
     startMic: "Démarrer le Micro", stopMic: "Arrêter le Micro",
     hintNormal: "Joue une seule corde, tiens-la stable et centre l'aiguille.",
     hintError: "Accès au micro refusé — autorise-le dans les paramètres du navigateur.",
+    refToneOn: "Son de référence : activé", refToneOff: "Son de référence : désactivé",
   },
   de: {
     brandTitle: "Gitarrenstimmgerät", brandSubtitle: "Standardstimmung · EADGBE",
@@ -74,6 +78,7 @@ const TRANSLATIONS = {
     startMic: "Mikrofon Starten", stopMic: "Mikrofon Stoppen",
     hintNormal: "Spiele eine einzelne Saite, halte sie ruhig und zentriere die Nadel.",
     hintError: "Mikrofonzugriff verweigert — erlaube ihn in den Browsereinstellungen.",
+    refToneOn: "Referenzton: an", refToneOff: "Referenzton: aus",
   },
   it: {
     brandTitle: "Accordatore per Chitarra", brandSubtitle: "Accordatura standard · EADGBE",
@@ -85,6 +90,7 @@ const TRANSLATIONS = {
     startMic: "Avvia Microfono", stopMic: "Ferma Microfono",
     hintNormal: "Suona una singola corda, tienila ferma e centra l'indicatore.",
     hintError: "Accesso al microfono negato — consentilo nelle impostazioni del browser.",
+    refToneOn: "Tono di riferimento: attivo", refToneOff: "Tono di riferimento: disattivo",
   },
   pt: {
     brandTitle: "Afinador de Violão", brandSubtitle: "Afinação padrão · EADGBE",
@@ -96,6 +102,7 @@ const TRANSLATIONS = {
     startMic: "Iniciar Microfone", stopMic: "Parar Microfone",
     hintNormal: "Toque uma única corda, mantenha-a estável e centralize a agulha.",
     hintError: "Acesso ao microfone negado — permita nas configurações do navegador.",
+    refToneOn: "Tom de referência: ativado", refToneOff: "Tom de referência: desativado",
   },
   ru: {
     brandTitle: "Гитарный Тюнер", brandSubtitle: "Стандартный строй · EADGBE",
@@ -107,6 +114,7 @@ const TRANSLATIONS = {
     startMic: "Включить Микрофон", stopMic: "Выключить Микрофон",
     hintNormal: "Сыграй одну струну, держи её ровно и центрируй стрелку.",
     hintError: "Доступ к микрофону запрещён — разрешите его в настройках браузера.",
+    refToneOn: "Эталонный тон: вкл", refToneOff: "Эталонный тон: выкл",
   },
   zh: {
     brandTitle: "吉他调音器", brandSubtitle: "标准调弦 · EADGBE",
@@ -118,6 +126,7 @@ const TRANSLATIONS = {
     startMic: "开启麦克风", stopMic: "停止麦克风",
     hintNormal: "只弹一根弦，保持稳定，让指针居中。",
     hintError: "麦克风访问被拒绝——请在浏览器设置中允许。",
+    refToneOn: "参考音：开启", refToneOff: "参考音：关闭",
   },
   ar: {
     brandTitle: "ضابط أوتار الغيتار", brandSubtitle: "الضبط القياسي · EADGBE",
@@ -129,6 +138,7 @@ const TRANSLATIONS = {
     startMic: "تشغيل الميكروفون", stopMic: "إيقاف الميكروفون",
     hintNormal: "اعزف على وتر واحد فقط، ثبّته، وتوسيط المؤشر.",
     hintError: "تم رفض الوصول إلى الميكروفون — يرجى السماح به في إعدادات المتصفح.",
+    refToneOn: "نغمة مرجعية: تشغيل", refToneOff: "نغمة مرجعية: إيقاف",
   },
 };
 
@@ -179,6 +189,8 @@ const historyLabelEl = document.getElementById("history-label");
 const langBtn = document.getElementById("lang-btn");
 const langBtnFlag = document.getElementById("lang-btn-flag");
 const langMenu = document.getElementById("lang-menu");
+const refToneBtn = document.getElementById("ref-tone-btn");
+const refToneIcon = document.getElementById("ref-tone-icon");
 
 LANGS.forEach((lang) => {
   const opt = document.createElement("button");
@@ -209,6 +221,7 @@ function applyLanguage() {
   brandTitleEl.textContent = t("brandTitle");
   brandSubtitleEl.textContent = t("brandSubtitle");
   historyLabelEl.textContent = t("historyLabel");
+  updateRefToneButton();
   render();
 }
 
@@ -238,9 +251,61 @@ stringNodes.forEach((node, index) => {
     selectedIndex = index;
     stringNodes.forEach((n, i) => n.classList.toggle("active", i === index));
     render();
+    if (referenceEnabled) playReferenceTone(STRINGS[index].freq);
   });
 });
 stringNodes[selectedIndex].classList.add("active");
+
+// Referans sesi: doğru akortun nasıl duyulması gerektiğini karşılaştırma
+// imkanı vermek için seçili telin hedef frekansında kısa bir sinüs tonu
+// çalıyoruz. Mikrofonun ayrı AudioContext'inden bağımsız - biri kapalıyken
+// diğeri çalışabilir.
+let referenceEnabled = false;
+let refAudioCtx = null;
+let refOscillator = null;
+
+function playReferenceTone(freq) {
+  if (!refAudioCtx) refAudioCtx = new AudioContext();
+  stopReferenceTone();
+  const ctx = refAudioCtx;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.value = freq;
+  const now = ctx.currentTime;
+  gain.gain.setValueAtTime(0, now);
+  gain.gain.linearRampToValueAtTime(0.18, now + 0.02);
+  gain.gain.setValueAtTime(0.18, now + 1.1);
+  gain.gain.linearRampToValueAtTime(0, now + 1.3);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start(now);
+  osc.stop(now + 1.35);
+  refOscillator = osc;
+}
+
+function stopReferenceTone() {
+  if (refOscillator) {
+    try { refOscillator.stop(); } catch (e) {}
+    refOscillator.disconnect();
+    refOscillator = null;
+  }
+}
+
+function updateRefToneButton() {
+  refToneBtn.classList.toggle("active", referenceEnabled);
+  refToneIcon.textContent = referenceEnabled ? "🔊" : "🔇";
+  refToneBtn.title = referenceEnabled ? t("refToneOn") : t("refToneOff");
+}
+
+refToneBtn.addEventListener("click", () => {
+  referenceEnabled = !referenceEnabled;
+  updateRefToneButton();
+  if (referenceEnabled) {
+    playReferenceTone(STRINGS[selectedIndex].freq);
+  } else {
+    stopReferenceTone();
+  }
+});
 
 micBtn.addEventListener("click", () => {
   listening ? stopMic() : startMic();
